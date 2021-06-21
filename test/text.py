@@ -13,9 +13,19 @@ async def main(some_txt: str):
     await aiostrike.close()
 
 
-async def check_id(id: int):
-    x = await aiostrike.GetInventoryValue(user_id=id)
+async def check_id():
+    x = await aiostrike.GetInventoryValue(1234567890)  # Some Random Steam ID
+    json_o = JsonUtils(x).cvt_json()
+    print(json_o['success'])
+    await aiostrike.close()
+
+
+async def text_two():
+    x = await aiostrike.GetItemList("A key", details=1)  # Some Random KEY
+    json_o = JsonUtils(x).cvt_json()
+    print(json_o)
+    await aiostrike.close()
 
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(main("AK-47 | Wasteland Rebel (Battle-Scarred)"))
+loop.run_until_complete(text_two())
